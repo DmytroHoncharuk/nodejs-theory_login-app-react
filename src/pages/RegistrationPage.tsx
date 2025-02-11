@@ -9,9 +9,23 @@ import { usePageError } from '../hooks/usePageError';
 import { useAuth } from '../components/AuthContext';
 
 type RegistrationError = AxiosError<{
-  errors?: { email?: string; password?: string };
+  errors?: {name?: string; email?: string; password?: string };
   message: string;
 }>;
+
+function validateName(name:string) {
+  const namePattern = /^[a-zA-Zа-яА-ЯёЁіІїЇєЄґҐ0-9]+$/;
+
+  if (!name) {
+    return 'Name is required';
+  }
+
+  if (name.length < 5) return 'At least 5 characters';
+
+  if (!namePattern.test(name)) {
+    return 'Name can only contain letters and numbers';
+  }
+}
 
 function validateEmail(value: string) {
   const EMAIL_PATTERN = /^[\w.+-]+@([\w-]+\.){1,3}[\w-]{2,}$/;
@@ -48,21 +62,23 @@ export const RegistrationPage = () => {
     <>
       <Formik
         initialValues={{
+          name: '',
           email: '',
           password: '',
         }}
         validateOnMount={true}
-        onSubmit={({ email, password }, formikHelpers) => {
+        onSubmit={({name, email, password }, formikHelpers) => {
           formikHelpers.setSubmitting(true);
 
           authService
-            .register(email, password)
+            .register(name, email, password)
             .then(() => setRegistered(true))
             .catch((error: RegistrationError) => {
               if (error.message) setError(error.message);
               if (!error.response?.data) return;
 
               const { errors, message } = error.response.data;
+              formikHelpers.setFieldError('name', errors?.name);
 
               formikHelpers.setFieldError('email', errors?.email);
               formikHelpers.setFieldError('password', errors?.password);
@@ -75,6 +91,39 @@ export const RegistrationPage = () => {
         {({ touched, errors, isSubmitting }) => (
           <Form className="box">
             <h1 className="title">Sign up</h1>
+            <div className="field">
+              <label htmlFor="name" className="label">
+                Username
+              </label>
+
+              <div className="control has-icons-left has-icons-right">
+                <Field
+                  validate={validateName}
+                  name="name"
+                  type="text"
+                  id="name"
+                  placeholder="John Doe"
+                  className={cn('input', {
+                    'is-danger': touched.name && errors.name,
+                  })}
+                />
+
+                <span className="icon is-small is-left">
+                  <i className="fa fa-user"></i>
+                </span>
+
+                {touched.name && errors.name && (
+                  <span className="icon is-small is-right has-text-danger">
+                    <i className="fas fa-exclamation-triangle"></i>
+                  </span>
+                )}
+              </div>
+
+              {touched.name && errors.name && (
+                <p className="help is-danger">{errors.name}</p>
+              )}
+            </div>
+
             <div className="field">
               <label htmlFor="email" className="label">
                 Email
