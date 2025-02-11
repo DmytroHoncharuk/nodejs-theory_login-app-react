@@ -118,15 +118,25 @@ export const LoginPage = () => {
               )}
             </div>
             <div className="field">
-              <button
-                type="submit"
-                className={cn('button is-success has-text-weight-bold', {
-                  'is-loading': isSubmitting,
-                })}
-                disabled={isSubmitting || !!errors.email || !!errors.password}
-              >
-                Log in
-              </button>
+              <div className="field is-grouped is-grouped-left">
+                <p className="control">
+                  <Link to="/forgotPassword" className="button is-light">
+                    Forgot Password?
+                  </Link>
+                </p>
+
+                <p className="control">
+                  <button
+                    type="submit"
+                    className={cn('button is-success has-text-weight-bold', {
+                      'is-loading': isSubmitting,
+                    })}
+                    disabled={isSubmitting || !!errors.email || !!errors.password}
+                  >
+                    Log in
+                  </button>
+                </p>
+              </div>
             </div>
             Do not have an account? <Link to="/sign-up">Sign up</Link>
           </Form>

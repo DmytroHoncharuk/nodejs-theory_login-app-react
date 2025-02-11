@@ -19,6 +19,10 @@ export const authService = {
     return client.post('/login', { email, password });
   },
 
+  forgotPassword: (email: string) => {
+    return client.post('forgotPassword', {email})
+  },
+
   logout: () => client.post('/logout'),
 
   refresh: (): Promise<AuthData> => client.get('/refresh'),

@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       accessTokenService.save(accessToken);
       setCurrentUser(user);
     } catch (error) {
-      console.log('User is not authentincated');
+      console.log('User is not authenticated');
     } finally {
       setChecked(true);
     }

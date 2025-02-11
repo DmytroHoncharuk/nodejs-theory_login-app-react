@@ -15,6 +15,7 @@ import { LoginPage } from './pages/LoginPage';
 import { RequireAuth } from './components/RequireAuth';
 import { UsersPage } from './pages/UsersPage';
 import { AxiosError } from 'axios';
+import { ForgotPasswordPage } from './pages/ForgotPasswordPage.tsx';
 
 export function App() {
   const navigate = useNavigate();
@@ -99,6 +100,7 @@ export function App() {
               element={<AccountActivationPage />}
             />
             <Route path="login" element={<LoginPage />} />
+            <Route path="forgotPassword" element={<ForgotPasswordPage/>}/>
 
             <Route path="/" element={<RequireAuth />}>
               <Route path="users" element={<UsersPage />} />
