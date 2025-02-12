@@ -120,7 +120,7 @@ export const LoginPage = () => {
             <div className="field">
               <div className="field is-grouped is-grouped-left">
                 <p className="control">
-                  <Link to="/forgotPassword" className="button is-light">
+                  <Link to="/forgot-password" className="button is-light">
                     Forgot Password?
                   </Link>
                 </p>

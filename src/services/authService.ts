@@ -20,7 +20,7 @@ export const authService = {
   },
 
   forgotPassword: (email: string) => {
-    return client.post('forgotPassword', {email})
+    return client.post('forgot-password', {email})
   },
 
   logout: () => client.post('/logout'),
