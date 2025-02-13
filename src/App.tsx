@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Routes, Route, Link, useNavigate, NavLink } from 'react-router-dom';
 
 import '@fortawesome/fontawesome-free/css/all.min.css';
@@ -13,14 +13,16 @@ import { RegistrationPage } from './pages/RegistrationPage';
 import { AccountActivationPage } from './pages/AccountActivationPage';
 import { LoginPage } from './pages/LoginPage';
 import { RequireAuth } from './components/RequireAuth';
-import { UsersPage } from './pages/UsersPage';
 import { AxiosError } from 'axios';
 import { ForgotPasswordPage } from './pages/ForgotPasswordPage.tsx';
+import { ResetPasswordPage } from './pages/ResetPassword.tsx';
+import { ProfilePage } from './pages/Profile.tsx';
 
 export function App() {
   const navigate = useNavigate();
   const [error, setError] = usePageError('');
   const { isChecked, currentUser, logout, checkAuth } = useAuth();
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
 
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
@@ -52,22 +54,39 @@ export function App() {
           <NavLink to="/" className="navbar-item">
             Home
           </NavLink>
-
-          <NavLink to="/users" className="navbar-item">
-            Users
-          </NavLink>
         </div>
 
         <div className="navbar-end">
           <div className="navbar-item">
             <div className="buttons">
               {currentUser ? (
-                <button
-                  className="button is-light has-text-weight-bold"
-                  onClick={handleLogout}
-                >
-                  Log out
-                </button>
+                <div className="dropdown is-right is-hoverable is-rounded">
+                  <div className="dropdown-trigger">
+                    <button
+                      className="button is-light has-text-weight-bold"
+                      aria-haspopup="true"
+                      aria-controls="dropdown-menu"
+                      onClick={() => setDropdownOpen(!isDropdownOpen)}
+                    >
+                      <span className="icon">
+                        <i className="fas fa-user"></i>
+                      </span>
+                    </button>
+                  </div>
+                  {isDropdownOpen && (
+                    <div className="dropdown-menu" id="dropdown-menu" role="menu">
+                      <div className="dropdown-content">
+                        <Link to="/profile" className="dropdown-item">
+                          My Profile
+                        </Link>
+                        <hr className="dropdown-divider" />
+                        <button className="dropdown-item" onClick={handleLogout}>
+                          Log out
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
               ) : (
                 <>
                   <Link
@@ -101,9 +120,9 @@ export function App() {
             />
             <Route path="login" element={<LoginPage />} />
             <Route path="forgot-password" element={<ForgotPasswordPage/>}/>
-
+            <Route path="reset-password/:token" element={<ResetPasswordPage/>}/>
+            <Route path="profile" element={<ProfilePage/>} />
             <Route path="/" element={<RequireAuth />}>
-              <Route path="users" element={<UsersPage />} />
             </Route>
           </Routes>
         </section>
