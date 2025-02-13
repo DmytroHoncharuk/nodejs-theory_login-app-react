@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { useAuth } from '../components/AuthContext';
-import { Loader } from '../components/Loader';
+import { useAuth } from '../../components/AuthContext.tsx';
+import { Loader } from '../../components/Loader.tsx';
 import { AxiosError } from 'axios';
 
 export const AccountActivationPage = () => {

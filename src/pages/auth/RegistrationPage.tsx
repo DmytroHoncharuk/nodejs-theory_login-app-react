@@ -3,10 +3,10 @@ import { Link, Navigate } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
 import cn from 'classnames';
 
-import { authService } from '../services/authService';
+import { authService } from '../../services/authService.ts';
 import { AxiosError } from 'axios';
-import { usePageError } from '../hooks/usePageError';
-import { useAuth } from '../components/AuthContext';
+import { usePageError } from '../../hooks/usePageError.ts';
+import { useAuth } from '../../components/AuthContext.tsx';
 
 type RegistrationError = AxiosError<{
   errors?: {name?: string; email?: string; password?: string };

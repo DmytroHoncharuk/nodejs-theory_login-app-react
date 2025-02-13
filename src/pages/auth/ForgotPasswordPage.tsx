@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Formik, Form, Field } from 'formik';
 import cn from 'classnames';
-import { authService } from '../services/authService';
+import { authService } from '../../services/authService.ts';
 import { AxiosError } from 'axios';
-import { usePageError } from '../hooks/usePageError';
+import { usePageError } from '../../hooks/usePageError.ts';
 
 type ForgotPasswordError = AxiosError<{ message?: string; errors?: { email?: string } }>
 
@@ -27,7 +27,7 @@ export const ForgotPasswordPage = () => {
   }
 
   return (
-    <>
+    <div className="container is-max-desktop">
       <Formik
         initialValues={{ email: '' }}
         validateOnMount={true}
@@ -85,6 +85,6 @@ export const ForgotPasswordPage = () => {
         )}
       </Formik>
       {error && <p className="notification is-danger is-light">{error}</p>}
-    </>
+    </div>
   );
 };

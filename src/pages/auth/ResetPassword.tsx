@@ -3,9 +3,9 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
 import cn from 'classnames';
 
-import { authService } from '../services/authService';
+import { authService } from '../../services/authService.ts';
 import { AxiosError } from 'axios';
-import { usePageError } from '../hooks/usePageError';
+import { usePageError } from '../../hooks/usePageError.ts';
 
 function validatePassword(value: string) {
   if (!value) return 'Password is required';

@@ -2,8 +2,8 @@ import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
 import cn from 'classnames';
 
-import { usePageError } from '../hooks/usePageError';
-import { useAuth } from '../components/AuthContext';
+import { usePageError } from '../../hooks/usePageError.ts';
+import { useAuth } from '../../components/AuthContext.tsx';
 import { AxiosError } from 'axios';
 
 const EMAIL_PATTERN = /^[\w.+-]+@([\w-]+\.){1,3}[\w-]{2,}$/;
