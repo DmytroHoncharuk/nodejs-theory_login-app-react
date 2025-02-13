@@ -9,14 +9,17 @@ import { useAuth } from './components/AuthContext';
 import { usePageError } from './hooks/usePageError';
 import { Loader } from './components/Loader';
 import { HomePage } from './pages/HomePage';
-import { RegistrationPage } from './pages/RegistrationPage';
-import { AccountActivationPage } from './pages/AccountActivationPage';
-import { LoginPage } from './pages/LoginPage';
+import { RegistrationPage } from './pages/auth/RegistrationPage.tsx';
+import { AccountActivationPage } from './pages/auth/AccountActivationPage.tsx';
+import { LoginPage } from './pages/auth/LoginPage.tsx';
 import { RequireAuth } from './components/RequireAuth';
 import { AxiosError } from 'axios';
-import { ForgotPasswordPage } from './pages/ForgotPasswordPage.tsx';
-import { ResetPasswordPage } from './pages/ResetPassword.tsx';
-import { ProfilePage } from './pages/Profile.tsx';
+import { ForgotPasswordPage } from './pages/auth/ForgotPasswordPage.tsx';
+import { ResetPasswordPage } from './pages/auth/ResetPassword.tsx';
+import { ProfilePage } from './pages/profile/ProfilePage.tsx';
+import { ProfileLayout } from './pages/profile/ProfileLayout.tsx';
+import { ChangeEmailPage } from './pages/profile/ChangeEmailPage.tsx';
+import { ChangePasswordPage } from './pages/profile/ChangePasswordPage.tsx';
 
 export function App() {
   const navigate = useNavigate();
@@ -121,7 +124,12 @@ export function App() {
             <Route path="login" element={<LoginPage />} />
             <Route path="forgot-password" element={<ForgotPasswordPage/>}/>
             <Route path="reset-password/:token" element={<ResetPasswordPage/>}/>
-            <Route path="profile" element={<ProfilePage/>} />
+            <Route path="/profile" element={<ProfileLayout/>}>
+              <Route index element={<ProfilePage />} />
+              <Route path="email" element={<ChangeEmailPage />} />
+              <Route path="password" element={<ChangePasswordPage />} />
+            </Route>
+
             <Route path="/" element={<RequireAuth />}>
             </Route>
           </Routes>
