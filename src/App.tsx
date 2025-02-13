@@ -26,11 +26,15 @@ export function App() {
   const [error, setError] = usePageError('');
   const { isChecked, currentUser, logout, checkAuth } = useAuth();
   const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const [showLoader, setShowLoader] = useState(true);
 
   useEffect(() => {
+    setTimeout(() => setShowLoader(false), 1000);
+
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     checkAuth();
   }, []);
+  if (showLoader) return <Loader />;
 
   if (!isChecked) {
     return <Loader />;
@@ -124,6 +128,7 @@ export function App() {
             <Route path="login" element={<LoginPage />} />
             <Route path="forgot-password" element={<ForgotPasswordPage/>}/>
             <Route path="reset-password/:token" element={<ResetPasswordPage/>}/>
+
             <Route path="/profile" element={<ProfileLayout/>}>
               <Route index element={<ProfilePage />} />
               <Route path="email" element={<ChangeEmailPage />} />
