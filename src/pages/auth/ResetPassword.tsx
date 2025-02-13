@@ -6,11 +6,8 @@ import cn from 'classnames';
 import { authService } from '../../services/authService.ts';
 import { AxiosError } from 'axios';
 import { usePageError } from '../../hooks/usePageError.ts';
+import { validatorService } from '../../utils/validators.ts';
 
-function validatePassword(value: string) {
-  if (!value) return 'Password is required';
-  if (value.length < 6) return 'At least 6 characters';
-}
 
 export const ResetPasswordPage = () => {
   const { token } = useParams<{ token: string }>();
@@ -58,7 +55,7 @@ export const ResetPasswordPage = () => {
             <label htmlFor="newPassword" className="label">New Password</label>
             <div className="control has-icons-left has-icons-right">
               <Field
-                validate={validatePassword}
+                validate={validatorService.validatePassword}
                 name="newPassword"
                 type="password"
                 id="newPassword"
@@ -78,7 +75,7 @@ export const ResetPasswordPage = () => {
             <label htmlFor="confirmPassword" className="label">Confirm Password</label>
             <div className="control has-icons-left has-icons-right">
               <Field
-                validate={validatePassword}
+                validate={validatorService.validatePassword}
                 name="confirmPassword"
                 type="password"
                 id="confirmPassword"

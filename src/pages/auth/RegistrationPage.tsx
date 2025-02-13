@@ -7,37 +7,13 @@ import { authService } from '../../services/authService.ts';
 import { AxiosError } from 'axios';
 import { usePageError } from '../../hooks/usePageError.ts';
 import { useAuth } from '../../components/AuthContext.tsx';
+import { validatorService } from '../../utils/validators.ts';
 
 type RegistrationError = AxiosError<{
   errors?: {name?: string; email?: string; password?: string };
   message: string;
 }>;
 
-function validateName(name:string) {
-  const namePattern = /^[a-zA-Zа-яА-ЯёЁіІїЇєЄґҐ0-9]+$/;
-
-  if (!name) {
-    return 'Name is required';
-  }
-
-  if (name.length < 5) return 'At least 5 characters';
-
-  if (!namePattern.test(name)) {
-    return 'Name can only contain letters and numbers';
-  }
-}
-
-function validateEmail(value: string) {
-  const EMAIL_PATTERN = /^[\w.+-]+@([\w-]+\.){1,3}[\w-]{2,}$/;
-
-  if (!value) return 'Email is required';
-  if (!EMAIL_PATTERN.test(value)) return 'Email is not valid';
-}
-
-const validatePassword = (value: string) => {
-  if (!value) return 'Password is required';
-  if (value.length < 6) return 'At least 6 characters';
-};
 
 export const RegistrationPage = () => {
   const [error, setError] = usePageError('');
@@ -98,7 +74,7 @@ export const RegistrationPage = () => {
 
               <div className="control has-icons-left has-icons-right">
                 <Field
-                  validate={validateName}
+                  validate={validatorService.validateName}
                   name="name"
                   type="text"
                   id="name"
@@ -131,7 +107,7 @@ export const RegistrationPage = () => {
 
               <div className="control has-icons-left has-icons-right">
                 <Field
-                  validate={validateEmail}
+                  validate={validatorService.validateEmail}
                   name="email"
                   type="email"
                   id="email"
@@ -163,7 +139,7 @@ export const RegistrationPage = () => {
 
               <div className="control has-icons-left has-icons-right">
                 <Field
-                  validate={validatePassword}
+                  validate={validatorService.validatePassword}
                   name="password"
                   type="password"
                   id="password"
