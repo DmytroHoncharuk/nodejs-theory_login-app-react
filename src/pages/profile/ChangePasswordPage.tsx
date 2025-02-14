@@ -2,19 +2,11 @@ import { useState } from 'react';
 import { Formik, Form, Field } from 'formik';
 import cn from 'classnames';
 import { userService } from '../../services/userService.ts';
-import { AxiosError } from 'axios';
 import { usePageError } from '../../hooks/usePageError.ts';
 import { useNavigate } from 'react-router-dom';
 import { validatorService } from '../../utils/validators.ts';
+import { ChangePasswordError } from '../../utils/errors.ts';
 
-type ChangePasswordError = AxiosError<{
-  message?: string;
-  errors?: {
-    oldPassword?: string;
-    newPassword?: string;
-    confirmPassword?: string;
-  }
-}>;
 
 export const ChangePasswordPage = () => {
   const navigate = useNavigate();
