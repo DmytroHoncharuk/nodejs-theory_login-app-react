@@ -20,6 +20,7 @@ import { ProfilePage } from './pages/profile/ProfilePage.tsx';
 import { ProfileLayout } from './pages/profile/ProfileLayout.tsx';
 import { ChangeEmailPage } from './pages/profile/ChangeEmailPage.tsx';
 import { ChangePasswordPage } from './pages/profile/ChangePasswordPage.tsx';
+import { ActivationRequiredPage } from './pages/auth/ActivationRequiredPage.tsx';
 
 export function App() {
   const navigate = useNavigate();
@@ -120,6 +121,7 @@ export function App() {
         <section className="section">
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/activation-required" element={<ActivationRequiredPage />} />
             <Route path="sign-up" element={<RegistrationPage />} />
             <Route
               path="activate/:email/:activationToken"

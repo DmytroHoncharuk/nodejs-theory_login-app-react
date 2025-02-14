@@ -18,15 +18,22 @@ httpClient.interceptors.request.use(request => {
   return request;
 });
 
+
 httpClient.interceptors.response.use(
   // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   res => res.data,
 
   // retry request after refreshing access token
   async (error: AxiosError) => {
+    if (error.response?.status === 403) {
+      window.location.href = '/activation-required';
+      return Promise.reject(error);
+    }
+
     if (error.response?.status !== 401) {
       throw error;
     }
+
       
     const originalRequest = error.config;
     const { accessToken } = await authService.refresh();
