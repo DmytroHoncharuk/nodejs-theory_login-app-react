@@ -5,11 +5,8 @@ import { userService } from '../../services/userService.ts';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Loader } from '../../components/Loader.tsx';
+import { UserForProfile } from '../../types/UserForProfile.ts';
 
-interface UserForProfile {
-  name?: string;
-  email: string;
-}
 
 export const ProfilePage = () => {
   const navigate = useNavigate();
