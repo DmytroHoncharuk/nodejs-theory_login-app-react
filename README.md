@@ -1,30 +1,73 @@
-# React + TypeScript + Vite
+# **Frontend for Node.js Authentication API**
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## **1️⃣ Project Overview**
 
-Currently, two official plugins are available:
+This project is the **frontend part** of an authentication system built with **React** and **Vite**. It supports **registration, login, password change, email activation, account management, and authentication persistence**.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The frontend interacts with the **backend API**, using **JWT tokens** and **cookies** for authentication.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## **🚀 Live Demo**
 
-- Configure the top-level `parserOptions` property like this:
+🔗 **Demo:** [authapp-dmytrohoncharuk.onrender.com](https://authapp-dmytrohoncharuk.onrender.com)
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+📌 **Test Credentials:**
+- **Email:** `testuser@example.com`
+- **Password:** `Test1234!`
+
+✅ **Full server-side validation is implemented.**
+✅ **AuthContext is used for storing authenticated user data.**
+
+---
+
+## **2️⃣ Backend Link**
+
+🔗 **Backend Repository:**  
+[GitHub: Backend](https://github.com/DmytroHoncharuk/node_auth-app/blob/develop)
+
+---
+
+## **3️⃣ Technologies and Features**
+
+- ✅ **React** – frontend framework  
+- ✅ **Vite** – fast development & build tool  
+- ✅ **React Router** – client-side routing  
+- ✅ **Axios** – API requests  
+- ✅ **JWT authentication** – access and refresh tokens  
+- ✅ **Cookies** – refresh token storage  
+- ✅ **Formik & Yup** – form handling and validation  
+- ✅ **Bulma** – UI styling  
+- ✅ **Framer Motion** – animations  
+- ✅ **CORS support** – secure API communication  
+- ✅ **Server-side validation** – ensures correct data handling  
+- ✅ **AuthContext** – user authentication state management  
+- ✅ **Render.com** – frontend deployment  
+
+---
+
+## **4️⃣ How to Run Locally**
+
+### **📌 Installation**
+
+```bash
+git clone https://github.com/YOUR_LINK.git
+cd authApp_front
+npm install
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### **📌 Environment Variables Setup**
+
+Create a `.env` file in the root directory and add:
+
+```env
+VITE_API_URL
+```
+
+### **📌 Start the Frontend**
+
+```bash
+npm run dev
+```
+
+⚡ The frontend will start at `http://localhost:5173`
