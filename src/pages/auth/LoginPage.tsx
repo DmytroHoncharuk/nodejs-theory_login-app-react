@@ -30,7 +30,7 @@ export const LoginPage = () => {
   }
 
   return (
-    <>
+    <div className="container">
       <Formik
         initialValues={{
           email: '',
@@ -144,6 +144,6 @@ export const LoginPage = () => {
       </Formik>
 
       {error && <p className="notification is-danger is-light">{error}</p>}
-    </>
+    </div>
   );
 };
